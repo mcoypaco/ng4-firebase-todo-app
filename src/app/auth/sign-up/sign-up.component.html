@@ -1,0 +1,50 @@
+<md-card-title>Sign up</md-card-title>
+<md-card-content>
+  <md-vertical-stepper linear>
+    <md-step [stepControl]="emailForm">
+      <form novalidate [formGroup]="emailForm" (ngSubmit)="emailSubmit()">
+        <ng-template mdStepLabel>
+          <ng-container *ngIf="email; else elseTemplate">
+            {{email}}
+          </ng-container>
+          <ng-template #elseTemplate>
+            Enter your email
+          </ng-template>          
+        </ng-template>
+        <md-form-field>
+          <input type="email" mdInput formControlName="email" placeholder="Email">
+          <md-error>Email is required and must be valid.</md-error>
+        </md-form-field>
+        <app-input-error message="Email already in use." *ngIf="emailAlreadyInUse"></app-input-error>
+        <div *ngIf="!emailAlreadyInUse">
+          <button md-button mdStepperNext type="submit">Next</button>
+        </div>
+      </form>
+    </md-step>
+    <md-step [stepControl]="passwordForm" *ngIf="emailForm.valid && !emailAlreadyInUse">
+      <form novalidate [formGroup]="passwordForm" (ngSubmit)="createUserWithEmailAndPassword()">
+        <ng-template mdStepLabel>Set your password</ng-template>
+        <md-form-field>
+          <input type="password" mdInput formControlName="password" placeholder="Password">
+          <md-error>Password is required and must be at least 8 characters.</md-error>
+        </md-form-field>
+        <app-input-error *ngIf="!passwordsMatch && passwordForm.controls.password.valid && passwordForm.controls.confirmPassword.touched" message="Passwords doesn't match."></app-input-error>
+        
+        <md-form-field>
+          <input type="password" mdInput formControlName="confirmPassword" placeholder="Confirm Password">
+          <md-error>Confirm Password is required.</md-error>
+        </md-form-field>
+        <app-input-error *ngIf="!passwordsMatch && passwordForm.controls.confirmPassword.valid && passwordForm.controls.password.touched" message="Passwords doesn't match."></app-input-error>
+        <ng-container *ngIf="busy; else elseTemplate">
+          <md-spinner></md-spinner>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <div>
+            <button md-button type="submit">Sign Up</button>
+          </div>
+        </ng-template>
+      </form>
+    </md-step>
+  </md-vertical-stepper>
+</md-card-content>
+  

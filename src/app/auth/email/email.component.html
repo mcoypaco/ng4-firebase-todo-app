@@ -1,0 +1,23 @@
+<md-card-content>
+  <form novalidate [formGroup]="form" (ngSubmit)="signInWithEmailAndPassword()" fxLayout="column" fxLayoutGap="20px">
+    <div fxLayout="row">
+      <md-form-field fxFlex>
+        <input type="email" mdInput formControlName="email" placeholder="Email">
+        <md-error>Email is required and must be valid.</md-error>
+      </md-form-field>
+    </div>
+    
+    <div fxLayout="row">
+      <md-form-field fxFlex>
+        <input type="password" mdInput formControlName="password" placeholder="Password">
+        <md-error>Password is required.</md-error>
+      </md-form-field>
+    </div>
+    
+    <div fxLayout="row" fxLayoutGap="20px">
+      <button md-raised-button color="primary" type="submit" fxFlex>Login</button>
+    </div>
+    <a routerLink="/password-reset">Having trouble logging in?</a>
+    <a routerLink="/login">Other login options</a>
+  </form>
+</md-card-content>

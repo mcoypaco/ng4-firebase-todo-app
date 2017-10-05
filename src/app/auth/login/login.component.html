@@ -1,0 +1,9 @@
+<div fxLayout="row" fxLayoutAlign="center center" class="content-container">
+  <div fxFlex fxFlex.gt-xs="50" fxFlex.md="40" fxFlex.gt-md="30" fxFlex.xl="20">
+      <div fxLayout="column" fxLayoutGap="20px">
+        <button md-raised-button (click)="signInWithGoogle()">Sign in with Google</button>
+        <button md-raised-button routerLink="/sign-in">Sign in with Email</button>
+        <a class="mat-body-1" routerLink="/sign-up">No account? Create one.</a>
+      </div>
+  </div>
+</div>
